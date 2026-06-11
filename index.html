@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Water Intelligence Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: white; padding: 20px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .chart-box { background: white; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Water Intelligence Dashboard</h1>
+        <form method="POST">
+            <input type="number" name="people" placeholder="No. of People" required>
+            <input type="number" name="temperature" placeholder="Temperature °C" required>
+            <select name="day_type"><option value="weekday">Weekday</option><option value="weekend">Weekend</option></select>
+            <button type="submit">Analyze Demand</button>
+        </form>
+    </div>
+
+    {% if show_report %}
+    <div class="grid">
+        <div class="card"><h3>Total Predicted</h3><h2 style="color: #38bdf8;">{{ prediction }} L</h2></div>
+        <div class="card"><h3>Per Resident</h3><h2>{{ per_person }} L</h2></div>
+        <div class="card" style="border-left: 5px solid {{ status_color }};">
+            <h3>Status</h3><h2 style="color: {{ status_color }};">{{ status }}</h2>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="chart-box"><canvas id="comparisonChart"></canvas></div>
+        <div class="chart-box"><canvas id="compositionChart"></canvas></div>
+    </div>
+
+    <script>
+        new Chart(document.getElementById('comparisonChart'), {
+            type: 'bar',
+            data: { labels: ['Predicted', 'Dataset Avg'], datasets: [{ data: [{{ prediction }}, {{ avg_dataset }}], backgroundColor: ['#38bdf8', '#475569'] }] }
+        });
+        new Chart(document.getElementById('compositionChart'), {
+            type: 'doughnut',
+            data: { labels: ['Base', 'Heat Penalty', 'Day Surge'], datasets: [{ data: [{{ people_impact }}, {{ heat_impact }}, {{ day_impact }}], backgroundColor: ['#38bdf8', '#f59e0b', '#ef4444'] }] }
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

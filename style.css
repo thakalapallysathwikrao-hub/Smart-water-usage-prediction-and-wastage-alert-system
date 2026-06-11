@@ -1,0 +1,117 @@
+body{
+font-family:'Poppins', sans-serif;
+margin:0;
+padding:0;
+height:100vh;
+
+background:linear-gradient(135deg,#1e3c72,#2a5298);
+
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.container{
+text-align:center;
+width:400px;
+}
+
+h1{
+font-weight:600;
+margin-bottom:5px;
+}
+
+.subtitle{
+font-size:14px;
+opacity:0.8;
+margin-bottom:25px;
+}
+
+/* Card Style */
+
+.card{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+
+padding:30px;
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+margin-bottom:20px;
+}
+
+/* Inputs */
+
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+
+border:none;
+border-radius:8px;
+
+font-size:14px;
+}
+
+/* Button */
+
+button{
+width:100%;
+padding:12px;
+
+border:none;
+border-radius:8px;
+
+background:#00c6ff;
+background:linear-gradient(to right,#00c6ff,#0072ff);
+
+color:white;
+font-size:15px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* Result */
+
+.result-card{
+animation:fadeIn 0.8s ease;
+}
+
+.result-box{
+background:rgba(255,255,255,0.2);
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+}
+
+.result-box h3{
+margin:5px 0;
+color:#fff;
+}
+
+.status{
+margin-top:10px;
+font-size:15px;
+}
+
+/* Animation */
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
